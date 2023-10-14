@@ -61,7 +61,7 @@ header {
     background-color: white;
     padding: 20px;
 }
-
+/**/
 .form-container {
     background-color: #f9f9f9;
     padding: 20px;
@@ -137,6 +137,9 @@ header {
 .menu-mobile a:hover {
     color: #00b300; /* Cambia el color al verde cuando se pasa el ratón por encima */
 }
+
+
+
 
 /* Estilos del footer */
 footer {
@@ -314,6 +317,87 @@ footer {
     color: #777; /* Color de texto más suave */
 }
 
+
+/* Estilos del formulario */
+/* Estilos generales para el formulario */
+.form-container_registro-usuario {
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .form-group_registro-usuario {
+    flex-basis: calc(50% - 10px);
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para los campos de entrada */
+  .form-group_registro-usuario label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-group_registro-usuario input,
+  .form-group_registro-usuario select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Estilos para los mensajes de error */
+  .error-message {
+    color: #ff5555;
+    font-size: 14px;
+  }
+  
+  /* Estilos para el botón de enviar */
+  .submit-button {
+    background-color: #00b300;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #008c00;
+  }
+  
+  /* Estilos al seleccionar el formulario */
+  .form-container_registro-usuario:focus-within {
+    border: 2px solid #00b300;
+    box-shadow: 0 0 10px rgba(0, 179, 0, 0.5);
+    transition: border 0.3s, box-shadow 0.3s;
+  }
+  
+  /* Media queries para hacerlo responsive */
+  @media screen and (max-width: 768px) {
+    .form-group_registro-usuario {
+      flex-basis: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .form-group_registro-usuario {
+      margin-bottom: 10px;
+    }
+  
+    .submit-button {
+      font-size: 16px;
+    }
+  }
+  
 
 /* Media Queries para hacerlo responsive */
 @media screen and (max-width: 768px) {
