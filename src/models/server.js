@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url'
 
 import routerUser from '../routes/usuarios.js';
 import db from '../../db/connection.js';
+import loginRouter from '../routes/login.js';
 
 class Server {
     constructor() {
@@ -13,7 +14,7 @@ class Server {
         this.__dirname = path.dirname(fileURLToPath(import.meta.url));
 
         this.paths = {
-            usuarios: '/api/usuarios', login: '/login', registro: '/registroUsuario'
+            usuarios: '/api/usuarios', login: '/login', registro: '/registroUsuario', ingresar: '/api/login'
         };
 
         // Métodos iniciales
@@ -51,7 +52,7 @@ class Server {
         this.app.use(this.paths.usuarios, routerUser);
         this.app.get(this.paths.login, (req, res) => res.sendFile(path.join(this.__dirname, '/../pages/login.html')));
         this.app.get(this.paths.registro, (req, res) => res.sendFile(path.join(this.__dirname, '/../pages/register.html')));
-        
+        this.app.use(this.paths.ingresar, loginRouter);
     }
 
     listen() {

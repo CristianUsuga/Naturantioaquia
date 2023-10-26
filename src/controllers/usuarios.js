@@ -1,5 +1,7 @@
-import { response, request } from 'express'
+import { response, request } from 'express';
 import Usuario from '../models/usuario.js';
+import bcrypt from 'bcryptjs';
+
 
 const usuariosGet = async (req, res) => {
   try {
@@ -31,23 +33,36 @@ const getUsuario = async (req, res) => {
   }
 };
 
-const usuariosPost = async (req = request , res = response) => {
+const usuariosPost = async (req = request, res = response) => {
   try {
-    const { correo } = req.body;
+    const { contraseña, ...usuarioData } = req.body;
 
     // Verificar si ya existe un usuario con el mismo email
     const existeEmail = await Usuario.findOne({
-      where: { correo },
+      where: { correo: usuarioData.correo },
     });
 
     if (existeEmail) {
       return res.status(400).json({
-        msg: `Ya existe un usuario con el email: ${correo}`,
+        msg: `Ya existe un usuario con el email: ${usuarioData.correo}`,
       });
     }
 
-    // Solo crear un nuevo usuario si el correo no existe
-    const usuario = await Usuario.create(req.body);
+    // Verificar si ya existe un usuario con el mismo ID
+    const existeUsuario = await Usuario.findByPk(usuarioData.id_usuario);
+
+    if (existeUsuario) {
+      return res.status(400).json({
+        msg: `Ya existe un usuario con el ID: ${usuarioData.id_usuario}`,
+      });
+    }
+
+    const salt = await bcrypt.genSalt(10); // Corregir el nombre de la función a bcrypt.genSalt
+    const hashPassword = await bcrypt.hash(contraseña, salt); // Corregir el nombre de la función a bcrypt.hash
+    console.log(`${usuarioData}`);
+    console.log('contraseña: ', hashPassword);
+    // Crear un nuevo usuario
+    const usuario = await Usuario.create({ ...usuarioData, contraseña: hashPassword });
 
     res.status(201).json({ usuario });
   } catch (error) {
