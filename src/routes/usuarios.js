@@ -3,7 +3,7 @@ import { usuariosDelete, usuariosGet, usuariosPatch, usuariosPost, usuariosPut, 
 const router = Router();
 import { check } from 'express-validator'; 
 
-import { validarCampos,validarFechaNacimiento } from "../middlewares/index.js";
+import { validarCampos,validarCelular,validarFechaNacimiento, validarTelefono } from "../middlewares/index.js";
 
 router.get('/', usuariosGet);//Mandar la referencia
 router.get('/:id_usuario', getUsuario);
@@ -18,8 +18,8 @@ router.post('/', [
     check('correo').isEmail(),
     check('contraseña').notEmpty().isLength({ min: 8 }).matches(/^(?=.*[A-Z])(?=.*\d)/),
     check('fecha_nacimiento').notEmpty().custom(validarFechaNacimiento),
-    check('celular').notEmpty().isNumeric().isLength({ min: 10, max: 10 }),
-    check('telefono').notEmpty().isNumeric().isLength({ min: 10, max: 10 }),
+    check('celular').notEmpty().isNumeric().isLength({ min: 10, max: 10 }).custom(validarCelular),
+    check('telefono').notEmpty().isNumeric().isLength({ min: 10, max: 10 }).custom(validarTelefono),
     check('rol_de_usuario').notEmpty(),
     check('tipo_de_documento').notEmpty(),
     check('estado_de_usuario').notEmpty(),

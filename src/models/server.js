@@ -2,10 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url'
+import cookieParser from 'cookie-parser';
 
 import routerUser from '../routes/usuarios.js';
 import db from '../../db/connection.js';
 import loginRouter from '../routes/login.js';
+import { methods as validarRol } from "../middlewares/validar-rol.js";
 
 class Server {
     constructor() {
@@ -14,7 +16,7 @@ class Server {
         this.__dirname = path.dirname(fileURLToPath(import.meta.url));
 
         this.paths = {
-            usuarios: '/api/usuarios', login: '/login', registro: '/registroUsuario', ingresar: '/api/login'
+            usuarios: '/api/usuarios', login: '/login', registro: '/registroUsuario', ingresar: '/api/login', admin:'/admin', log:'/logeado'
         };
 
         // Métodos iniciales
@@ -22,6 +24,8 @@ class Server {
         this.middlewares();
         // Rutas de la aplicación
         this.routes();
+        
+
     }
 
     async dbConnection() {
@@ -43,16 +47,24 @@ class Server {
         // Directorio público
         this.app.use(express.static('public'));
 
-
+        this.app.use(cookieParser());
         // Manejo de errores global
         this.app.use(this.errorHandler);
     }
 
+    
+
     routes() {
         this.app.use(this.paths.usuarios, routerUser);
-        this.app.get(this.paths.login, (req, res) => res.sendFile(path.join(this.__dirname, '/../pages/login.html')));
-        this.app.get(this.paths.registro, (req, res) => res.sendFile(path.join(this.__dirname, '/../pages/register.html')));
         this.app.use(this.paths.ingresar, loginRouter);
+
+        //Pages
+        this.app.get(this.paths.login,validarRol.soloPublico, (req, res) => res.sendFile(path.join(this.__dirname, '/../pages/login.html')));
+        this.app.get(this.paths.registro,validarRol.soloPublico, (req, res) => res.sendFile(path.join(this.__dirname, '/../pages/register.html')));
+        this.app.get(this.paths.admin,validarRol.soloAdmin, (req, res) => res.sendFile(path.join(this.__dirname, '/../pages/admin.html')));
+        //TODO: agregar validar rol desues a logeado
+        this.app.get(this.paths.log, (req, res) => res.sendFile(path.join(this.__dirname, '/../pages/logeado.html'))); 
+        
     }
 
     listen() {
