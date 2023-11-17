@@ -9,7 +9,7 @@ async function soloAdmin(req, res, next) {
     try {
         const logueado = await revisarCookie(req);
         const usuario = await usuarioToken(req);
-        if (logueado === true && usuario.rol_de_usuario  === 1 ) {
+        if (logueado === true && usuario.perfil_usuario  === 1 ) {
             return next();
         } else {
             return res.redirect("/login");
@@ -29,9 +29,9 @@ async function soloPublico(req, res, next) {
         } else {
             const usuario = await usuarioToken(req);
             console.log("solo publico: ", usuario.dataValues)
-            if (usuario.rol_de_usuario === 1) {
+            if (usuario.perfil_usuario === 1) {
                 return res.redirect("/admin");
-            } else if (usuario.rol_de_usuario === 2) {
+            } else if (usuario.perfil_usuario === 2) {
                 return res.redirect("/logeado");
             } else {
                 // Otros roles, manejar según sea necesario

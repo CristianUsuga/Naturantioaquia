@@ -1,4 +1,4 @@
-const mensajeError = document.getElementsByClassName('error');
+const mensajeError = document.querySelector('.error');
 
 document.getElementById("login-form").addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -21,14 +21,13 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
                 email, password
             })
         });
-
+ 
         if (res.ok) {
             const resJson = await res.json();
             if (resJson.redirect) {
                 window.location.href = resJson.redirect;
             }
         } else {
-            
             const errorResponse = await res.json();
             mensajeError.textContent = errorResponse.message;
             mensajeError.classList.remove("escondido");

@@ -1,49 +1,61 @@
+// usuario.js
 import { DataTypes } from "sequelize";
 import db from "../../db/connection.js";
 
 const Usuario = db.define('Usuario', {
-
     id_usuario: {
-        type: DataTypes.INTEGER, // Cambiar de DataTypes.NUMBER a DataTypes.INTEGER
-        primaryKey: true
+        type: DataTypes.BIGINT,
+        primaryKey: true,
     },
     nombre: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100),
+        allowNull: false,
     },
     primer_apellido: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(50),
     },
     segundo_apellido: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(50),
     },
     correo: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         unique: true,
+        allowNull: false,
     },
     contraseña: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100),
+        allowNull: false,
     },
     fecha_nacimiento: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        allowNull: false,
     },
     celular: {
-        type: DataTypes.INTEGER
+        type: DataTypes.BIGINT,
+        allowNull: false,
     },
     telefono: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: true, // Permite valores nulos
+      },      
+    perfil_usuario: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     },
-    rol_de_usuario: {
-        type: DataTypes.INTEGER
+    tipo_documento: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     },
-    tipo_de_documento: {
-        type: DataTypes.INTEGER
+    estado_usuario: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     },
-    estado_de_usuario: {
-        type: DataTypes.INTEGER
+    sexo_usuario: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     },
-    sexo_de_usuario: {
-        type: DataTypes.INTEGER
-    },
+}, {
+    timestamps: true, // Esto agrega createdAt y updatedAt automáticamente
 });
 
 export default Usuario;
