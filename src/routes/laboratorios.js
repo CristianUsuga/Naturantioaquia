@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { 
-  laboratoriosGet, 
+ laboratoriosGet, 
   laboratoriosPost,
   laboratoriosPut,
   laboratoriosDelete,
@@ -18,7 +18,6 @@ router.get('/', laboratoriosGet);
 router.get('/:id_laboratorio', getLaboratorio);
 
 router.post('/', [
-  check('id_laboratorio').isNumeric(),
   check('nombre_laboratorio').notEmpty(),
   check('correo').isEmail(), 
   check('telefono').optional().custom(validarTelefono),

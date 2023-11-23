@@ -9,41 +9,21 @@ const validarCelular = (value) => {
 };
 
 const validarTelefono = (value, { req, res }) => {
-    // Verifica si el campo 'telefono' está presente en la solicitud y no es null
     if (!value || value.length === 0) {
-        return true; // Considera esto como válido si el campo no está presente o tiene longitud cero
+        return true;
     }
 
-    // Verifica si 'telefono' es un número
     if (isNaN(value)) {
-        res.status(400).json({
-            errors: [{
-                type: 'field',
-                msg: 'El número de teléfono debe ser un valor numérico.',
-                path: 'telefono',
-                location: 'body'
-            }]
-        });
-        return false;
+        throw new Error('El número de teléfono debe ser un valor numérico.');
     }
 
-    // Verifica la longitud, si comienza con '60' y si solo contiene dígitos
     if (value.length !== 10 || !value.startsWith('60') || !/^\d+$/.test(value)) {
-        console.error('Valor de telefono:', value); // Imprime el valor actual de 'telefono'
-        res.status(400).json({
-            errors: [{
-                type: 'field',
-                msg: 'El número de teléfono debe tener 10 dígitos y empezar con "60".',
-                path: 'telefono',
-                location: 'body'
-            }]
-        });
-        return false;
+        console.error('Valor de telefono:', value);
+        throw new Error('El número de teléfono debe tener 10 dígitos y empezar con "60".');
     }
 
     return true;
 };
-
 
 
 export { validarCelular, validarTelefono };
