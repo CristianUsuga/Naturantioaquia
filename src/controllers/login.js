@@ -35,7 +35,7 @@ const loginPost = async (req = request, res = response) => {
                 res.cookie('token', token, cookieOption);
 
                 // Redirección basada en el rol del usuario
-                if (usuario.rol_de_usuario === 1) {
+                if (usuario.perfil_usuario === 1) {
                     return res.status(200).send({
                         status: 'Éxito',
                         message: 'Usuario autenticado correctamente',

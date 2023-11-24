@@ -34,16 +34,16 @@ function validateForm() {
         "id_usuario": formData.get("cedula"),
         "nombre": formData.get("primerNombre"),
         "primer_apellido": formData.get("primerApellido"),
-        "segundo_apellido": formData.get("segundoApellido"),
+        "segundo_apellido": formData.get("segundoApellido") !== "" ? formData.get("segundoApellido") : null,
         "correo": formData.get("correo"),
         "contraseña": formData.get("password1"),
         "fecha_nacimiento": formData.get("fechaNacimiento"),
         "celular": formData.get("celular"),
-        "telefono": formData.get("telefono"),
-        "rol_de_usuario": formData.get("rol"),
-        "tipo_de_documento": formData.get("tipoDocumento"),
-        "estado_de_usuario": formData.get("estado"),
-        "sexo_de_usuario": formData.get("sexo")
+        "telefono": formData.get("telefono") !== "" ? formData.get("telefono") : null,
+        "perfil_usuario": formData.get("rol"),
+        "tipo_documento": formData.get("tipoDocumento"),
+        "estado_usuario": formData.get("estado"),
+        "sexo_usuario": formData.get("sexo")
     };
 
     registerUser(userData);
@@ -232,13 +232,14 @@ async function registerUser(userData) {
                 window.location.href = '/login';
             });
         } else {
-            const errorMessage = await response.text();
+            const errorResponse = await response.json();
+            const errorMessage = errorResponse.errors[0].msg; // Obtener el mensaje de error
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
                 text: errorMessage,
             });
-        }
+        }        
     } catch (error) {
         console.error('Error:', error);
         Swal.fire({

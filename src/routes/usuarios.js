@@ -19,11 +19,11 @@ router.post('/', [
     check('contraseña').notEmpty().isLength({ min: 8 }).matches(/^(?=.*[A-Z])(?=.*\d)/),
     check('fecha_nacimiento').notEmpty().custom(validarFechaNacimiento),
     check('celular').notEmpty().isNumeric().isLength({ min: 10, max: 10 }).custom(validarCelular),
-    check('telefono').notEmpty().isNumeric().isLength({ min: 10, max: 10 }).custom(validarTelefono),
-    check('rol_de_usuario').notEmpty(),
-    check('tipo_de_documento').notEmpty(),
-    check('estado_de_usuario').notEmpty(),
-    check('sexo_de_usuario').notEmpty(),
+    check('telefono').optional().custom(validarTelefono), 
+    check('perfil_usuario').notEmpty(),
+    check('tipo_documento').notEmpty(),
+    check('estado_usuario').notEmpty(),
+    check('sexo_usuario').notEmpty(),
     validarCampos,
     
 ], usuariosPost);

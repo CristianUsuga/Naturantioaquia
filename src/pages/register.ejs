@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/register.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <header>
+        <%- include('partials/navigation') %>
+    </header>
+    <h1>Registro de Usuario</h1>
+    <form id="form_usuarios" class="form-container_registro-usuario" onsubmit="return validateForm()">
+
+        <div class="form-group_registro-usuario">
+            <label for="cedula">Número de identificación.</label>
+            <input type="text" id="cedula" name="cedula" oninput="validateCedula()" required>
+            <span id="cedulaError" class="error" style="display: none;"></span>
+        </div>
+
+        <div class="form-group_registro-usuario">
+            <label for="tipoDocumento">Tipo de Documento</label>
+            <select id="tipoDocumento" name="tipoDocumento" required>
+                <option value="">Seleccionar</option>
+                <option value="1">Cédula de Ciudadanía</option>
+                <option value="2">Cédula de Extranjería</option>
+                <option value="3">Tarjeta de identidad</option>
+            </select>
+        </div>
+
+        <div class="form-group_registro-usuario">
+            <label for="primerNombre">Primer Nombre</label>
+            <input type="text" id="primerNombre" name="primerNombre" oninput="validateNombre('primerNombre')" required>
+            <span id="primerNombreError" class="error-message"></span>
+        </div>
+
+        <div class="form-group_registro-usuario">
+            <label for="primerApellido">Primer Apellido</label>
+            <input type="text" id="primerApellido" name="primerApellido" oninput="validateApellido('primerApellido')"
+                required>
+            <span id="primerApellidoError" class="error-message"></span>
+        </div>
+
+        <div class="form-group_registro-usuario">
+            <label for="segundoApellido">Segundo Apellido</label>
+            <input type="text" id="segundoApellido" name="segundoApellido"
+                oninput="validateSApellido('segundoApellido')">
+            <span id="segundoApellidoError" class="error-message"></span>
+        </div>
+
+        <div class="form-group_registro-usuario">
+            <label for="correo">Correo</label>
+            <input type="email" id="correo" name="correo" oninput="validateCorreo()" required>
+            <span id="correoError" class="error-message"></span>
+        </div>
+
+        <div class="form-group_registro-usuario">
+            <label for="password1">Contraseña</label>
+            <input type="password" id="password1" name="password1" oninput="validatePassword()" required
+                autocomplete="new-password">
+            <span id="passwordError" class="error-message"></span>
+        </div>
+
+        <div class="form-group_registro-usuario">
+            <label for="confirmPassword">Repetir Contraseña</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" oninput="validateConfirmPassword()"
+                required autocomplete="new-password">
+            <span id="confirmPasswordError" class="error-message"></span>
+        </div>
+
+        <div class="form-group_registro-usuario">
+            <label for="celular">Celular</label>
+            <input type="tel" id="celular" name="celular" oninput="validateCelular()" required>
+            <span id="celularError" class="error-message"></span>
+        </div>
+
+        <div class="form-group_registro-usuario">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" oninput="validateTelefono()">
+            <span id="telefonoError" class="error-message"></span>
+        </div>
+
+        <div class="form-group_registro-usuario">
+            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+            <input type="date" id="fechaNacimiento" name="fechaNacimiento" oninput="validateFechaNacimiento()" required>
+            <span id="fechaNacimientoError" class="error-message"></span>
+        </div>
+
+        <input type="hidden" id="estado" name="estado" value="1">
+
+        <div class="form-group_registro-usuario">
+            <label for="sexo">Sexo</label>
+            <select id="sexo" name="sexo" required>
+                <option value="">Seleccionar</option>
+                <option value="2">Masculino</option>
+                <option value="1">Femenino</option>
+            </select>
+        </div>
+
+        <input type="hidden" id="rol" name="rol" value="2">
+
+        <div class="submit-container">
+            <input type="submit" name="registro" value="Enviar" class="submit-button">
+        </div>
+    </form>
+    <%- include('partials/footer') %>
+</body>
+
+</html>
