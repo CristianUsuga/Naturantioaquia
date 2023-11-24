@@ -109,7 +109,7 @@ const usuariosDelete = async(req, res = response) => {
       msg:' No existe un usuario con el id: '+ id_usuario,
     });
   }
-  await usuario.update({estado_de_usuario: 0})
+  await usuario.update({estado_usuario: 0})
   //await usuario .destroy();
 
   res.json(usuario);

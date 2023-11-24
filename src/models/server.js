@@ -8,6 +8,7 @@ import routerUser from '../routes/usuarios.js';
 import laboratoriosRouter from '../routes/laboratorios.js';
 import db from '../../db/connection.js';
 import loginRouter from '../routes/login.js';
+import productosRauter from "../routes/productos.js";
 import { methods as validarRol } from "../middlewares/validar-rol.js";
 
 class Server {
@@ -17,8 +18,12 @@ class Server {
         this.__dirname = path.dirname(fileURLToPath(import.meta.url));
 
         this.paths = {
-            usuarios: '/api/usuarios', login: '/login', registro: '/registroUsuario', ingresar: '/api/login', admin:'/admin', log:'/logeado',
-            about:'/about', contact:'/contact', services:'/services', laboratorios: '/api/laboratorios', laboratorio:'/laboratorio'
+            productosAPI: '/api/productos',
+            usuarios: '/api/usuarios',
+            login: '/login', registro: '/registroUsuario',
+            ingresar: '/api/login', admin: '/admin', log: '/logeado',
+            about: '/about', contact: '/contact', services: '/services',
+            laboratorios: '/api/laboratorios', laboratorio: '/laboratorio'
         };
 
         // Métodos iniciales
@@ -26,7 +31,7 @@ class Server {
         this.middlewares();
         // Rutas de la aplicación
         this.routes();
-        
+
 
     }
 
@@ -54,19 +59,20 @@ class Server {
         this.app.use(this.errorHandler);
     }
 
-    
+
 
     routes() {
         this.app.use(this.paths.usuarios, routerUser);
         this.app.use(this.paths.ingresar, loginRouter);
         this.app.use(this.paths.laboratorios, laboratoriosRouter);
+        this.app.use(this.paths.productosAPI,productosRauter);
 
         //Pages
-        this.app.get(this.paths.login,validarRol.soloPublico, (req, res) => res.render(path.join(this.__dirname, '/../pages/login.ejs')));
-        this.app.get(this.paths.registro,validarRol.soloPublico, (req, res) => res.render(path.join(this.__dirname, '/../pages/register.ejs')));
+        this.app.get(this.paths.login, validarRol.soloPublico, (req, res) => res.render(path.join(this.__dirname, '/../pages/login.ejs')));
+        this.app.get(this.paths.registro, validarRol.soloPublico, (req, res) => res.render(path.join(this.__dirname, '/../pages/register.ejs')));
         this.app.get(this.paths.about, validarRol.soloPublico, (req, res) => {
             res.render(path.join(this.__dirname, '/../pages/about.ejs'));
-        });        
+        });
         this.app.get(this.paths.contact, validarRol.soloPublico, (req, res) => {
             res.render(path.join(this.__dirname, '/../pages/contact.ejs'));
         });
@@ -74,11 +80,11 @@ class Server {
             res.render(path.join(this.__dirname, '/../pages/services.ejs'));
         });
 
-        this.app.get(this.paths.admin,validarRol.soloAdmin, (req, res) => res.render(path.join(this.__dirname, '/../pages/admin.ejs')));
-        this.app.get(this.paths.laboratorio,validarRol.soloAdmin, (req, res) => res.render(path.join(this.__dirname, '/../pages/forms/laboratorios.ejs')));
+        this.app.get(this.paths.admin, validarRol.soloAdmin, (req, res) => res.render(path.join(this.__dirname, '/../pages/admin.ejs')));
+        this.app.get(this.paths.laboratorio, validarRol.soloAdmin, (req, res) => res.render(path.join(this.__dirname, '/../pages/forms/laboratorios.ejs')));
         //TODO: agregar validar rol desues a logeado
-        this.app.get(this.paths.log, (req, res) => res.render(path.join(this.__dirname, '/../pages/logeado.ejs'))); 
-        
+        this.app.get(this.paths.log, (req, res) => res.render(path.join(this.__dirname, '/../pages/logeado.ejs')));
+
     }
 
     listen() {
