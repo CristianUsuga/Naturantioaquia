@@ -18,6 +18,8 @@ class Server {
         this.__dirname = path.dirname(fileURLToPath(import.meta.url));
 
         this.paths = {
+            categoriasProductosAPI: '/api/categoriasProductos',
+            categoriasAPI: '/api/categoriasProductos',
             productosAPI: '/api/productos',
             usuarios: '/api/usuarios',
             login: '/login', registro: '/registroUsuario',

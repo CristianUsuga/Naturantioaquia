@@ -64,19 +64,19 @@ const productosPost = async (req = request, res = response) => {
 
 const ProductosPut = async (req, res = response) => {
 
-  const { id_producto } = req.params;
-  const {body} = req;
+  const { p_id_producto } = req.params;
+  const {createdAt,updatedAt, id_producto, ...resto } = req.body;
 
   try {
 
-    const producto = await Producto.findByPk(id_producto);
+    const producto = await Producto.findByPk(p_id_producto);
     if (!producto) {
       return res.status(404).json({
-        msg: `No existe un producto con el id ${id_producto} `,
+        msg: `No existe un producto con el id ${p_id_producto} `,
       });
     }
 
-    await producto.update(body);
+    await producto.update(resto);
     res.json(producto);
     
   } catch (error) {
@@ -95,7 +95,7 @@ const productoDelete = async(req, res = response) => {
       msg:' No existe un producto con el id: '+ id_producto,
     });
   }
-  await producto.update({estado_producto: 0})
+  await producto.update({estado_producto: 2})
   //await usuario .destroy();
 
   res.json(producto);

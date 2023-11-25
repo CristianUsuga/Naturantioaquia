@@ -1,15 +1,15 @@
 import { Router } from 'express';
-import { ProductosPut, getProducto, productoDelete, productosGet, productosPatch, productosPost } from '../controllers/productos.js';
+import {  } from '../controllers/categorias.js';
 const router = Router();
 import { check } from 'express-validator';
 
-import { validarCampos, validarStock, validarPrecioNoNegativo } from "../middlewares/index.js";
+import { } from "../middlewares/index.js";
 
-router.get('/', productosGet);//Mandar la referencia
-router.get('/:id_producto', getProducto);
+router.get('/', productosGet);
+router.get('/:id_categoria', getProducto);
 
 
-router.put('/:id_producto',);
+router.put('/:id_categoria',);
 
 router.post('/', [
     check('nombre_producto').notEmpty().withMessage('El nombre del producto es obligatorio.'),
@@ -21,9 +21,9 @@ router.post('/', [
     validarCampos, 
   ], productosPost);
   
-router.delete('/:id_producto', productoDelete);
+router.delete('/:id_categoria', productoDelete);
 
-router.put('/:p_id_producto', ProductosPut);
+router.put('/:p_id_categoria', ProductosPut);
 
 router.patch('/', productosPatch);
 
