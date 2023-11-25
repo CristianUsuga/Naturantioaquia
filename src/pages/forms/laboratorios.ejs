@@ -32,7 +32,7 @@
 
           <div class="form-group col-md-6">
             <label for="correo">Correo:</label>
-            <input type="email" class="form-control" id="correo" oninput="validateCorreo()" required>
+            <input type="email" class="form-control" id="correo" oninput="validateCorreo('email')" required>
             <span id="correoError" class="error-message"></span>
           </div>
         </div>
@@ -40,13 +40,13 @@
         <div class="row">
           <div class="col-md-6 form-group">
             <label for="telefono">Teléfono:</label>
-            <input type="text" class="form-control" id="telefono" oninput="validateTelefono()">
+            <input type="text" class="form-control" id="telefono" oninput="validateTelefono('telefono')">
             <span id="telefonoError" class="error-message"></span>
           </div>
 
           <div class="form-group col-md-6">
             <label for="celular">Celular:</label>
-            <input type="text" class="form-control" id="celular" oninput="validateCelular()">
+            <input type="text" class="form-control" id="celular" oninput="validateCelular('celular')">
             <span id="celularError" class="error-message"></span>
           </div>
         </div>
@@ -97,6 +97,72 @@
           </div>
         </div>
       </div>
+      <!-- Modal Editar-->
+    <div class="modal fade" id="exampleEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Editar transportista</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <table class="table">
+                    <form id="form_labs">
+
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <label for="id_laboratorioEditar">Id laboratorio</label>
+                          <input type="text" class="form-control" id="id_laboratorio" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="nombre_laboratorioEditar">Nombre:</label>
+                          <input type="text" class="form-control" id="nombre_laboratorio" oninput="validateNombre('nombre_laboratorioEditar')" required>
+                          <span id="nombre_laboratorioEditarError" class="error-message"></span>
+                        </div>
+                      </div>
+              
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <label for="correo">Correo:</label>
+                          <input type="email" class="form-control" id="correoEditar" oninput="validateCorreo('emailEditar')" required>
+                          <span id="correoEditarError" class="error-message"></span>
+                        </div>
+                        
+                        <div class="col-md-6 form-group">
+                          <label for="telefonoEditar">Teléfono:</label>
+                          <input type="text" class="form-control" id="telefonoEditar" oninput="validateTelefono('telefonoEditar')">
+                          <span id="telefonoEditarError" class="error-message"></span>
+                        </div>
+                      </div>
+              
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <label for="celularEditar">Celular:</label>
+                          <input type="text" class="form-control" id="celularEditar" oninput="validateCelular('celularEditar')">
+                          <span id="celularEditarError" class="error-message"></span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                          <label for="estadoEditar">Estado:</label>
+                          <select id="estadoEditar" class="form-control">
+                            <option value="">Seleccionar</option>
+                            <option value="1">Activo</option>
+                            <option value="2">Inactivo</option>
+                          </select>
+                        </div>
+                      </div>
+              
+                      <input type="button" value="Enviar" class="submit-button btn btn-success m-3" onclick="validateAndUpdate()" />
+                    </form>
+                  </table>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                      id="closeModalEdit">Cerrar</button>
+              </div>
+          </div>
+      </div>
+  </div>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
