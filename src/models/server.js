@@ -42,13 +42,9 @@ class Server {
         this.middlewares();
         // Rutas de la aplicación
         this.routes();
-<<<<<<< HEAD
-
-=======
         
         // Motor de plantillas (EJS en este caso)
         this.app.set('view engine', 'ejs');
->>>>>>> ejs
     }
 
     async dbConnection() {
