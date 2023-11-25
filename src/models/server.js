@@ -13,6 +13,7 @@ import productosRauter from "../routes/productos.js";
 import { methods as validarRol } from "../middlewares/validar-rol.js";
 import routerCategorias from '../routes/categorias.js';
 import routerCategoriasProductos from '../routes/categoriasProductos.js';
+import routerImagenesProductos from '../routes/imagenesProductos.js';
 
 class Server {
     constructor() {
@@ -21,6 +22,7 @@ class Server {
         this.__dirname = path.dirname(fileURLToPath(import.meta.url));
 
         this.paths = {
+            imagenesAPI : '/api/imagenes',
             categoriasProductosAPI: '/api/categoriasProductos',
             categoriasAPI: '/api/categorias',
             productosAPI: '/api/productos',
@@ -83,6 +85,7 @@ class Server {
         this.app.use(this.paths.transportistas, transportistasRouter);
         this.app.use(this.paths.categoriasAPI, routerCategorias);
         this.app.use(this.paths.categoriasProductosAPI, routerCategoriasProductos);
+        this.app.use(this.paths.imagenesAPI, routerImagenesProductos);
 
         //Pages
         this.app.get(this.paths.login, validarRol.soloPublico, (req, res) => res.render(path.join(this.__dirname, '/../pages/login.ejs')));
