@@ -4,7 +4,7 @@ import db from "../../db/connection.js";
 import Categoria from "./categorias.js";
 import Producto from "./productos.js";
 
-const CategoriaProducto = db.define('CategoriaProducto', {
+const CategoriaProducto = db.define('categorias_productos', {
     id_categoria: {
         type: DataTypes.INTEGER,
         primaryKey: true,

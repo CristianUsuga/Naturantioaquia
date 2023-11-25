@@ -9,4 +9,3 @@ const db = new Sequelize('naturantioquia','root','cami0330',{
 });
 
 export default db;
-
