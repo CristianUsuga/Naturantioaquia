@@ -2,7 +2,7 @@
 import { DataTypes } from "sequelize";
 import db from "../../db/connection.js";
 
-const Categoria = db.define('Categoria', {
+const Categoria = db.define('Categorias', {
     id_categoria: {
         type: DataTypes.INTEGER,
         autoIncrement: true,

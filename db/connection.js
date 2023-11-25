@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 
 
-const db = new Sequelize('naturantioquia','root','cami0330',{
+const db = new Sequelize('naturantioquia','Naturantioquia','123456',{
     host: '127.0.0.1',
     dialect: "mysql", //que tipo 
     // logging: false,
@@ -9,4 +9,3 @@ const db = new Sequelize('naturantioquia','root','cami0330',{
 });
 
 export default db;
-

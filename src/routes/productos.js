@@ -8,9 +8,6 @@ import { validarCampos, validarStock, validarPrecioNoNegativo } from "../middlew
 router.get('/', productosGet);//Mandar la referencia
 router.get('/:id_producto', getProducto);
 
-
-router.put('/:id_producto',);
-
 router.post('/', [
     check('nombre_producto').notEmpty().withMessage('El nombre del producto es obligatorio.'),
     check('descripcion_producto').notEmpty().withMessage('La descripción del producto es obligatoria.'),
